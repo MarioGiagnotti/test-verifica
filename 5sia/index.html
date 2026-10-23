@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5ª SIA - Materie</title>
+    <meta name="description" content="Attività didattiche per la classe 5ª SIA organizzate per materia.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, Helvetica, sans-serif; background: #f4f7fb; color: #1f2937; line-height: 1.6; }
+        header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 70px 20px; text-align: center; }
+        header h1 { font-size: 2.8rem; margin-bottom: 15px; }
+        header p { max-width: 750px; margin: auto; font-size: 1.15rem; opacity: 0.95; }
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        .intro { text-align: center; margin-bottom: 45px; }
+        .intro h2 { font-size: 2rem; margin-bottom: 12px; color: #1e3a8a; }
+        .intro p { max-width: 750px; margin: auto; color: #4b5563; }
+        .classes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(0,0,0,0.12); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .card h3 { color: #1e3a8a; margin-bottom: 10px; font-size: 1.4rem; }
+        .card p { color: #6b7280; margin-bottom: 20px; }
+        .button { display: inline-block; background: #2563eb; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; transition: background 0.2s ease; }
+        .button:hover { background: #1d4ed8; }
+        .info { margin-top: 55px; background: white; border-left: 5px solid #2563eb; padding: 25px 30px; border-radius: 10px; box-shadow: 0 5px 18px rgba(0,0,0,0.06); }
+        .info h2 { margin-bottom: 10px; color: #1e3a8a; }
+        .breadcrumb { margin-bottom: 20px; text-align: center; }
+        .breadcrumb a { color: #2563eb; text-decoration: none; font-weight: bold; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        footer { margin-top: 70px; padding: 30px 20px; text-align: center; background: #111827; color: #d1d5db; font-size: 0.9rem; }
+        footer strong { color: white; }
+        @media (max-width: 600px) { header { padding: 50px 20px; } header h1 { font-size: 2.1rem; } header p { font-size: 1rem; } .container { margin-top: 35px; } }
+    </style>
+</head>
+<body>
+<header>
+    <h1>5ª SIA</h1>
+    <p>Seleziona la materia per accedere a verifiche, esercitazioni e attività didattiche.</p>
+</header>
+
+<main class="container">
+
+    <div class="breadcrumb">
+        <a href="../">← Torna a Verifiche</a>
+    </div>
+
+    <section class="intro">
+        <h2>Materie disponibili</h2>
+        <p>Le risorse sono organizzate per materia. Accedi alla cartella di interesse per consultare le verifiche disponibili.</p>
+    </section>
+
+    <section class="classes">
+
+        <article class="card">
+            <div class="card-icon">💻</div>
+            <h3>Informatica</h3>
+            <p>Verifiche ed esercitazioni di Informatica per la classe 5ª SIA.</p>
+            <a class="button" href="Informatica/">Accedi alle attività →</a>
+        </article>
+
+        <article class="card">
+            <div class="card-icon">🌐</div>
+            <h3>Sistemi e Reti</h3>
+            <p>Verifiche, laboratori e attività su sistemi, reti e infrastrutture.</p>
+            <a class="button" href="Sistemi_e_Reti/">Accedi alle attività →</a>
+        </article>
+
+        <article class="card">
+            <div class="card-icon">📊</div>
+            <h3>GPOI</h3>
+            <p>Gestione del Progetto e Organizzazione d'Impresa: verifiche e casi di studio.</p>
+            <a class="button" href="GPOI/">Accedi alle attività →</a>
+        </article>
+
+        <article class="card">
+            <div class="card-icon">🔧</div>
+            <h3>Tecnologia</h3>
+            <p>Attività e approfondimenti di Tecnologia e innovazione digitale.</p>
+            <a class="button" href="Tecnologia/">Accedi alle attività →</a>
+        </article>
+
+    </section>
+
+    <section class="info">
+        <h2>Struttura delle cartelle</h2>
+        <p>Ogni materia contiene le verifiche organizzate per data. Seleziona la materia per visualizzare l'elenco delle attività disponibili.</p>
+    </section>
+
+</main>
+
+<footer>
+    <p><strong>5ª SIA</strong> · Verifiche e attività</p>
+    <p>Materiali per lo studio e l'apprendimento</p>
+</footer>
+</body>
+</html>
