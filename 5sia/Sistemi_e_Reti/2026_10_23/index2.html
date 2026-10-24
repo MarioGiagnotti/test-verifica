@@ -110,44 +110,62 @@ table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}td,th{p
 const TITOLO = "Verifica di Sistemi e Reti - classe 5SIA - data: 23/10/2026";
 const DESCRIZIONE = "25 domande a risposta multipla. Una sola risposta corretta per domanda. Buon lavoro!";
 const PIN_DOCENTE = "1234";
+const ID_VERIFICA = "SR-2026-02"; // identificativo UNICO di questa verifica: cambialo per ogni nuova verifica (non riusare mai lo stesso)
 const DURATA_MINUTI = 90; // durata della verifica in minuti
-const MODALITA_TEST = false; // true = si può ripetere più volte (test). Per la verifica vera: false
-// Voto in decimi: [massimo di risposte corrette per quella fascia, voto]
-const VOTI = [[3,4],[7,4.5],[10,5],[11,5.5],[12,6],[14,6.5],[16,7],[18,7.5],[20,8],[23,8.5],[24,9],[25,10]];
+const MODALITA_TEST = true; // true = si può ripetere più volte (test). Per la verifica vera: false
+// PESI: se nessuna domanda ha il campo "p", tutte le domande pesano uguale (100/N ciascuna).
+// Per pesi diversi aggiungi p:<percentuale> a OGNI domanda, es. {"q":"...","o":[...],"c":1,"p":20}. La somma deve fare 100.
+// VOTI: [massima percentuale di punteggio per quella fascia, voto in decimi]. L'ultima fascia deve avere 100.
+// (Questa tabella equivale alla precedente per 25 domande: 3 corrette = 12%, 7 = 28%, 10 = 40%, ...)
+const VOTI = [[12,4],[28,4.5],[40,5],[44,5.5],[48,6],[56,6.5],[64,7],[72,7.5],[80,8],[92,8.5],[96,9],[100,10]];
 const DOMANDE = [
- {"q": "La frase: «il livello applicazione è il browser»", "o": ["È corretta", "È sbagliata: il browser è nel livello applicazione", "È sbagliata: il browser è un’applicazione", "Nessuna delle precedenti"], "c": 2},
- {"q": "Il livello applicazione nello stack TCP/IP si colloca:", "o": ["Al primo livello", "Al sesto livello", "Al secondo livello", "Nessuna delle precedenti"], "c": 3},
- {"q": "Perché senza DNS non apri un sito anche se Internet funziona?", "o": ["Perché il livello applicazione non conosce l’IP del server", "Perché il DNS necessita di SMTP per funzionare", "Perché il DNS necessita di FTP per funzionare", "Perché il DNS non sa se viene usato HTTP o HTTPS"], "c": 0},
- {"q": "Cosa fa davvero il livello di applicazione?", "o": ["Servizi alle App", "Semantica e servizi alle APP", "Semantica, Formato, Servizi alle App e regole di comunicazione", "Regole di comunicazione"], "c": 2},
- {"q": "Su quale protocollo di livello trasporto si basa HTTP 1.1?", "o": ["IP", "UDP", "QUIC", "TCP"], "c": 3},
- {"q": "Nel modello Client/Server...", "o": ["Il client è una macchina attiva ed il server una passiva", "Il server chiede una risorsa ed il client risponde alla richiesta", "Il client è un processo passivo ed il server uno attivo", "Il client chiede una risorsa ed il server risponde alla richiesta"], "c": 3},
- {"q": "Nel modello Client/Server...", "o": ["Il server rimane in ascolto su porte logiche specifiche", "Il client rimane in ascolto su porte logiche specifiche", "Il client non interpreta JSON/HTML", "Il server avvia la comunicazione"], "c": 0},
- {"q": "Nel modello architetturale «Two Tier»:", "o": ["Logica, dati e interfaccia utente sono nello stesso blocco", "La logica è separata dal blocco UI+DB", "Ogni modulo è separato", "Nessuna delle precedenti"], "c": 1},
- {"q": "Nella tecnologia a microservizi...", "o": ["Client e server lavorano a turno scambiandosi i ruoli", "Per aggiornare un microservizio devo necessariamente modificare anche gli altri", "Ogni servizio può gestire diverse funzioni", "Nessuna delle precedenti"], "c": 0},
- {"q": "Cos’è una API REST?", "o": ["Un microservizio", "Un’architettura che permette di far comunicare applicazioni diverse", "Uno dei livelli del modello ISO/OSI", "Nessuna delle precedenti"], "c": 1},
- {"q": "Quale metodo HTTP uso se ho necessità di richiedere una risorsa?", "o": ["PUT", "DELETE", "POST", "GET"], "c": 3},
- {"q": "Nel metodo POST...", "o": ["La lunghezza dei caratteri nel body è circa 2000 char", "L’upload dei file è impossibile", "I parametri sono visibili nell’URL", "I parametri non sono visibili nell’URL"], "c": 3},
- {"q": "La struttura dell’URL è:", "o": ["Protocollo – host + path + parametri + risorsa", "Risorsa – protocollo – parametri – host", "Risorsa – host – parametri – protocollo", "Protocollo – host + path – risorsa + parametri"], "c": 3},
- {"q": "Nell’API «GET /api/contatti?q=...&citta=Milano»", "o": ["La chiave del parametro è citta", "Il valore del parametro è città", "La chiave del parametro è api", "Il valore del parametro è contatti"], "c": 0},
- {"q": "Il comando «ping»", "o": ["Consente di verificare la raggiungibilità di una destinazione", "Consente di riparare i possibili guasti", "Consente di verificare la risposta di un server", "Nessuna delle precedenti"], "c": 0},
- {"q": "Il comando «netstat»", "o": ["Funziona da firewall", "Consente di vedere le porte aperte in ascolto", "Consente di analizzare i dati", "Nessuna delle precedenti"], "c": 1},
- {"q": "Il comando «nslookup»:", "o": ["Serve a risolvere i nomi di dominio in indirizzi IP", "È un tool di scansione", "Ripara gli errori di DNS sul PC", "Nessuna delle precedenti"], "c": 0},
- {"q": "Il comando «tracert»:", "o": ["Rivela l’IP di un server", "Garantisce una mappa esatta in tempo reale", "Misura la latenza su ogni nodo", "Nessuna delle precedenti"], "c": 2},
- {"q": "Data la rete 192.168.0.0 si vuole determinare la subnet mask che consenta di avere almeno 20 IP disponibili. La subnet mask richiesta è:", "o": ["255.255.255.20", "255.255.255.240", "255.255.255.224", "Nessuna delle precedenti"], "c": 2},
- {"q": "Dato l’indirizzo IP 192.168.1.5/24", "o": ["L’indirizzo è interno alla rete", "L’indirizzo è l’indirizzo di broadcast", "L’indirizzo è l’indirizzo di rete", "L’indirizzo è esterno alla rete"], "c": 0},
- {"q": "Dato l’indirizzo IP 172.16.88.27/24, l’indirizzo di broadcast è:", "o": ["172.16.255.0", "172.16.88.255", "172.16.255.255", "172.255.255.255"], "c": 1},
- {"q": "Dato l’indirizzo IP 172.16.88.27/24, l’indirizzo di rete è:", "o": ["172.16.255.0", "172.16.0.0", "172.0.0.0", "172.16.88.0"], "c": 3},
- {"q": "A partire dall’indirizzo IP 172.16.0.0/16, voglio creare una prima subnet che contenga 254 IP utili e da questa un’altra subnet che contenga 6 IP utili. Le due reti sono:", "o": ["172.16.0.0/24 e 172.16.255.248/29", "172.16.0.0/24 e 172.16.0.248/29", "172.16.255.0/24 e 172.16.255.248/29", "Nessuna delle precedenti"], "c": 1},
- {"q": "A partire dalla rete 192.168.0.0/30...", "o": ["Posso avere solo due IP utili", "Posso avere solo quattro IP utili", "Non ho IP utili", "La rete data non è ammissibile"], "c": 0},
- {"q": "A partire dalla rete 172.16.0.0/28...", "o": ["Posso sempre creare 8 subnet ciascuna con un massimo di 30 IP utili", "È un indirizzo in classe B, ho a disposizione 65536 IP per cui posso creare 8 subnet ciascuna con un massimo di 30 IP utili", "Non posso creare nessun’altra subnet", "Rappresenta una rete con 14 IP utili"], "c": 3}
+ {"q": "In quale livello dello stack TCP/IP opera il protocollo HTTP?", "o": ["Livello di rete", "Livello di trasporto", "Livello di collegamento", "Livello di applicazione"], "c": 3},
+ {"q": "Qual è la funzione principale del DNS?", "o": ["Tradurre i nomi di dominio in indirizzi IP", "Assegnare indirizzi IP dinamici ai client", "Cifrare il traffico tra browser e server", "Instradare i pacchetti tra reti diverse"], "c": 0},
+ {"q": "Quale porta usa di default il protocollo HTTPS?", "o": ["80", "21", "25", "443"], "c": 3},
+ {"q": "Quale protocollo si usa normalmente per l’invio della posta elettronica?", "o": ["POP3", "SMTP", "IMAP", "FTP"], "c": 1},
+ {"q": "Nel modello Client/Server, chi avvia la comunicazione?", "o": ["Il server, inviando dati non richiesti", "Entrambi contemporaneamente", "Il client, inviando una richiesta", "Nessuna delle precedenti"], "c": 2},
+ {"q": "Un server web rimane in ascolto:", "o": ["Su una porta logica specifica, ad esempio la 80 o la 443", "Su una porta casuale scelta a ogni richiesta", "Solo dopo aver ricevuto un ping", "Nessuna delle precedenti"], "c": 0},
+ {"q": "Nell’architettura «Three Tier» le componenti sono separate in:", "o": ["Interfaccia utente e database", "Client, router e switch", "Presentazione, logica applicativa e dati", "Nessuna delle precedenti"], "c": 2},
+ {"q": "Quale tra queste è una caratteristica tipica dei microservizi?", "o": ["Un unico blocco software che contiene tutte le funzioni", "Ogni servizio può essere aggiornato e distribuito in modo indipendente", "Tutti i servizi devono usare lo stesso linguaggio e lo stesso database", "Nessuna delle precedenti"], "c": 1},
+ {"q": "Quale metodo HTTP si usa tipicamente per eliminare una risorsa?", "o": ["DELETE", "GET", "POST", "PUT"], "c": 0},
+ {"q": "Quale metodo HTTP si usa per inviare al server i dati di un form senza mostrarli nell’URL?", "o": ["GET", "HEAD", "POST", "Nessuna delle precedenti"], "c": 2},
+ {"q": "Il codice di stato HTTP 404 indica che:", "o": ["La richiesta è andata a buon fine", "Il server ha subito un errore interno", "L’accesso alla risorsa è vietato", "La risorsa richiesta non è stata trovata"], "c": 3},
+ {"q": "Il codice di stato HTTP 200 indica che:", "o": ["La risorsa è stata spostata", "La richiesta è andata a buon fine", "La richiesta non è valida", "Il server non è raggiungibile"], "c": 1},
+ {"q": "Nell’URL «https://www.esempio.it/api/utenti?id=7», qual è il protocollo?", "o": ["www.esempio.it", "/api/utenti", "https", "id=7"], "c": 2},
+ {"q": "Nell’API «GET /api/utenti?id=7&ruolo=admin», qual è il valore del parametro «ruolo»?", "o": ["id", "7", "utenti", "admin"], "c": 3},
+ {"q": "Quale formato è molto usato per scambiare dati in una API REST?", "o": ["BMP", "MP3", "JSON", "EXE"], "c": 2},
+ {"q": "Il comando «ping» serve a:", "o": ["Verificare se una destinazione è raggiungibile", "Elencare le porte aperte in ascolto", "Tradurre un nome di dominio in indirizzo IP", "Nessuna delle precedenti"], "c": 0},
+ {"q": "Il comando «netstat» serve a:", "o": ["Verificare se una destinazione è raggiungibile", "Visualizzare le connessioni attive e le porte in ascolto", "Tradurre un nome di dominio in indirizzo IP", "Nessuna delle precedenti"], "c": 1},
+ {"q": "Il comando «nslookup» serve a:", "o": ["Visualizzare le porte in ascolto", "Mostrare i router attraversati", "Interrogare il DNS per ottenere l’indirizzo IP di un nome", "Nessuna delle precedenti"], "c": 2},
+ {"q": "Il comando «tracert» serve a:", "o": ["Mostrare i router attraversati per raggiungere una destinazione", "Interrogare il DNS", "Bloccare il traffico indesiderato", "Nessuna delle precedenti"], "c": 0},
+ {"q": "Data la rete 192.168.10.0/24, quanti indirizzi IP utili (host) sono disponibili?", "o": ["256", "255", "252", "254"], "c": 3},
+ {"q": "Qual è la subnet mask corrispondente al prefisso /27?", "o": ["255.255.255.192", "255.255.255.240", "255.255.255.248", "255.255.255.224"], "c": 3},
+ {"q": "Dato l’indirizzo IP 10.0.5.77/24, l’indirizzo di rete è:", "o": ["10.0.5.0", "10.0.0.0", "10.0.5.255", "10.0.5.77"], "c": 0},
+ {"q": "Dato l’indirizzo IP 10.0.5.77/24, l’indirizzo di broadcast è:", "o": ["10.0.5.254", "10.255.255.255", "10.0.5.255", "10.0.255.255"], "c": 2},
+ {"q": "Data la rete 192.168.1.0, si vuole una subnet mask che consenta di avere almeno 50 IP utili. La subnet mask richiesta è:", "o": ["255.255.255.128", "255.255.255.224", "255.255.255.192", "Nessuna delle precedenti"], "c": 2},
+ {"q": "Una rete con prefisso /29 mette a disposizione:", "o": ["8 IP utili", "6 IP utili", "4 IP utili", "2 IP utili"], "c": 1}
 ];
 /* ========================================================================= */
 const $=id=>document.getElementById(id);
-const voto=p=>VOTI.find(([m])=>p<=m)[1],fmt=v=>String(v).replace(".",",");
+const fmt=v=>String(v).replace(".",",");
+const AVV=[];
+const PESI=(()=>{
+  const n=DOMANDE.length,haP=DOMANDE.some(d=>d.p!==undefined);
+  if(!haP)return DOMANDE.map(()=>100/n);
+  if(DOMANDE.some(d=>d.p===undefined))AVV.push("Alcune domande non hanno il peso p: vengono considerate di peso 0.");
+  const s=DOMANDE.reduce((a,d)=>a+(Number(d.p)||0),0);
+  if(Math.abs(s-100)>0.01)AVV.push("La somma dei pesi è "+s+" e non 100: i pesi vengono riportati a 100.");
+  return DOMANDE.map(d=>(Number(d.p)||0)*100/s);
+})();
+if(VOTI[VOTI.length-1][0]<100)AVV.push("L'ultima fascia di VOTI deve avere massimo 100.");
+if(VOTI.some((v,i)=>i&&v[0]<=VOTI[i-1][0]))AVV.push("Le fasce di VOTI devono essere in ordine crescente.");
+const isOk=(x,i)=>x!==null&&x!==undefined&&x!=="-"&&Number(x)===DOMANDE[i].c;
+const percent=a=>Math.round(a.reduce((s,x,i)=>s+(isOk(x,i)?PESI[i]:0),0)*100)/100;
+const voto=pc=>(VOTI.find(([m])=>pc<=m)||VOTI[VOTI.length-1])[1];
 let cur=0,ans=Array(DOMANDE.length).fill(null),nome="",done=false;
 $("t").textContent=TITOLO;$("desc").textContent=DESCRIZIONE;document.title=TITOLO;
 $("dur").textContent="Durata: "+DURATA_MINUTI+" minuti. Il timer parte quando clicchi «Apri la verifica» e non si ferma.";
-if(MODALITA_TEST){$("tb").style.display="block";$("rst").style.display="";$("rst").onclick=()=>{try{localStorage.removeItem(KEY2)}catch(e){}location.reload()}}
+if(MODALITA_TEST){$("tb").style.display="block";if(AVV.length)$("tb").textContent+=" ⚠ "+AVV.join(" ⚠ ");$("rst").style.display="";$("rst").onclick=()=>{try{localStorage.removeItem(KEY2)}catch(e){}location.reload()}}
 
 /* --- protezione anti copia --- */
 ["copy","cut","contextmenu","dragstart","selectstart"].forEach(e=>document.addEventListener(e,ev=>{const t=ev.target.nodeType===1?ev.target:ev.target.parentElement;if(!(t&&t.closest("input,textarea,code")))ev.preventDefault()}));
@@ -173,8 +191,8 @@ function render(){
   saveState();$("sq").innerHTML=ans.map(a=>'<i class="'+(a!==null?"done":"")+'"></i>').join("");
   $("prog").textContent="Risposte: "+ans.filter(a=>a!==null).length+" / "+DOMANDE.length;
 }
-const KEY="verifica_consegnata_"+encodeURIComponent(TITOLO);
-const KEY2="verifica_incorso_"+encodeURIComponent(TITOLO);
+const KEY="verifica_consegnata_"+encodeURIComponent(ID_VERIFICA);
+const KEY2="verifica_incorso_"+encodeURIComponent(ID_VERIFICA);
 const DUR=DURATA_MINUTI*60000;let t0=0,tm=null;
 function saveState(){if(!t0||done)return;try{localStorage.setItem(KEY2,JSON.stringify({n:nome,s:t0,a:ans}))}catch(e){}}
 function tick(){
@@ -205,11 +223,12 @@ function consegna(auto){
   $("confirm").classList.remove("on");if(done)return;done=true;clearInterval(tm);$("submit").disabled=true;
   try{localStorage.removeItem(KEY2)}catch(e){}
   const punti=ans.reduce((s,a,i)=>s+(a===DOMANDE[i].c?1:0),0);
-  $("score").textContent="Voto: "+fmt(voto(punti))+" / 10";
+  const pc=percent(ans);
+  $("score").textContent="Voto: "+fmt(voto(pc))+" / 10";
   const payload={n:nome,p:punti,t:DOMANDE.length,a:ans.map(a=>a===null?"-":a).join(""),d:new Date(Math.min(Date.now(),t0+DUR)).toISOString()};
   const cod=btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   $("code").textContent=cod;if(!MODALITA_TEST){try{localStorage.setItem(KEY,cod)}catch(e){}}
-  $("saved").textContent="Hai realizzato "+punti+" punti su "+DOMANDE.length+" (una risposta corretta = 1 punto).";
+  $("saved").textContent="Hai risposto correttamente a "+punti+" domande su "+DOMANDE.length+" (punteggio: "+fmt(pc)+"%).";
   $("res").classList.add("on");
   $("saved").textContent+=" Copia il codice qui sotto e incollalo come consegna su Classroom.";
   if(auto)$("saved").textContent="Tempo scaduto: la verifica è stata consegnata automaticamente. "+$("saved").textContent;
@@ -222,7 +241,7 @@ $("pinok").onclick=async()=>{
   if($("pin").value!==PIN_DOCENTE){alert("PIN errato");return}
   $("pinbox").style.display="none";$("docbody").style.display="block";table();
 };
-const RKEY="verifica_risultati_"+encodeURIComponent(TITOLO);
+const RKEY="verifica_risultati_"+encodeURIComponent(ID_VERIFICA);
 const dec=c=>JSON.parse(decodeURIComponent(escape(atob(c))));
 function loadR(){try{return JSON.parse(localStorage.getItem(RKEY)||"[]")}catch(e){return[]}}
 function saveR(l){try{localStorage.setItem(RKEY,JSON.stringify(l))}catch(e){}}
@@ -230,11 +249,11 @@ function table(){
   const rows=loadR().map(c=>{try{return dec(c)}catch(e){return null}}).filter(Boolean).sort((a,b)=>a.n.localeCompare(b.n));
   if(!rows.length){$("tab").textContent="Nessun risultato inserito.";return}
   const t=document.createElement("table");
-  t.innerHTML="<tr><th>Studente</th><th>Punti</th><th>Voto</th><th>Data</th>"+DOMANDE.map((_,i)=>"<th>D"+(i+1)+"</th>").join("")+"</tr>";
+  t.innerHTML="<tr><th>Studente</th><th>Corrette (punteggio)</th><th>Voto</th><th>Data</th>"+DOMANDE.map((_,i)=>"<th>D"+(i+1)+"</th>").join("")+"</tr>";
   rows.forEach(r=>{
-    const tr=t.insertRow();let p=0;
-    const cells=DOMANDE.map((d,i)=>{const a=r.a[i];if(a===undefined||a==="-")return["–",""];if(+a===d.c){p++;return["✓","ok"]}return["✗","ko"]});
-    [r.n,p+"/"+DOMANDE.length,fmt(voto(p))+"/10",new Date(r.d).toLocaleString("it-IT")].forEach(v=>tr.insertCell().textContent=v);
+    const tr=t.insertRow();let p=0,w=0;
+    const cells=DOMANDE.map((d,i)=>{const a=r.a[i];if(a===undefined||a==="-")return["–",""];if(+a===d.c){p++;w+=PESI[i];return["✓","ok"]}return["✗","ko"]});
+    [r.n,p+"/"+DOMANDE.length+" ("+fmt(Math.round(w*100)/100)+"%)",fmt(voto(Math.round(w*100)/100))+"/10",new Date(r.d).toLocaleString("it-IT")].forEach(v=>tr.insertCell().textContent=v);
     cells.forEach(([s,k])=>{const td=tr.insertCell();td.textContent=s;td.className=k});
   });
   $("tab").innerHTML="";$("tab").appendChild(t);
